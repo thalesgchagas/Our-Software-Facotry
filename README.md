@@ -22,6 +22,8 @@ This funccionality will work along with **Location** and point routes to the est
 
 **DELIVERY DATE 16/10/2017**
 
+[Minimum Viable Product 1st delivery task list](https://trello.com/b/HKfc4IpA "Redirects to MVP 1st delivery Trello list")
+
 ### Minimum Viable Product - 2nd delivery
 
 #### Customer Database Integration
@@ -51,4 +53,4 @@ Add establishments shortcuts to Open Google Maps and show a route to the selecte
 
 **DELIVERY DATE 04/12/2017**
 
-[Minimum Viable Product 1st delivery task list](https://trello.com/b/HKfc4IpA "Redirects to MVP 1st delivery Trello list")
+[Minimum Viable Product 2nd delivery task list](https://trello.com/b/D3gFo0Qu "Redirects to MVP 2nd delivery Trello list")
