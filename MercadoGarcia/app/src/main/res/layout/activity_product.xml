@@ -82,14 +82,14 @@
         android:id="@+id/unity_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unidade 3:"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/unity_4"
-        app:layout_constraintRight_toRightOf="@+id/unity_2"
-        tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="21dp"
-        app:layout_constraintLeft_toLeftOf="@+id/unity_2" />
+        android:text="Unidade 3:"
+        app:layout_constraintBottom_toTopOf="@+id/unity_4"
+        app:layout_constraintLeft_toLeftOf="@+id/unity_2"
+        app:layout_constraintRight_toRightOf="@+id/unity_2"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
     <TextView
         android:id="@+id/price_3"
@@ -112,14 +112,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Unidade 4:"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="@+id/price_4"
-        app:layout_constraintRight_toRightOf="@+id/unity_3"
-        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/unity_3"
-        app:layout_constraintTop_toTopOf="@+id/price_4" />
+        app:layout_constraintRight_toRightOf="@+id/unity_3"
+        app:layout_constraintTop_toTopOf="@+id/price_4"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/price_4"
@@ -152,5 +154,37 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginBottom="64dp"
         app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/btn_maps1"
+        android:layout_width="75"
+        android:layout_height="45dp"
+        android:text="Mapa"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <Button
+        android:id="@+id/btn_maps2"
+        android:layout_width="75"
+        android:layout_height="45"
+        android:text="Mapa"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="295dp" />
+
+    <Button
+        android:id="@+id/btn_maps3"
+        android:layout_width="75"
+        android:layout_height="45"
+        android:text="Mapa"
+        tools:layout_editor_absoluteX="293dp"
+        tools:layout_editor_absoluteY="354dp" />
+
+    <Button
+        android:id="@+id/btn_maps4"
+        android:layout_width="75"
+        android:layout_height="45"
+        android:text="Mapa"
+        tools:layout_editor_absoluteX="293dp"
+        tools:layout_editor_absoluteY="408dp" />
 
 </android.support.constraint.ConstraintLayout>
