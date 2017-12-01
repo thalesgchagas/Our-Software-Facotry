@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "327433950881",
+    "firebase_url": "https://mercadogarcia-c0137.firebaseio.com",
+    "project_id": "mercadogarcia-c0137",
+    "storage_bucket": "mercadogarcia-c0137.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327433950881:android:b40295a87bead0d0",
+        "android_client_info": {
+          "package_name": "com.pds.caio.mercadogarcia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327433950881-mfq5tc4gcgo253diuj1t8e3ov9q2ks91.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pds.caio.mercadogarcia",
+            "certificate_hash": "58f4e03cfbf989c93ba653ebf840dea749624c75"
+          }
+        },
+        {
+          "client_id": "327433950881-cto0uegnroclm03ellon7dj56ncrs59g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDodud6SJSuSdC3T4cxc90cJ9hj4R_byGk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327433950881-cto0uegnroclm03ellon7dj56ncrs59g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
