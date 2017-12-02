@@ -4,20 +4,26 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 public class ProductActivity extends AppCompatActivity{
     private SQLiteDatabase db;
     private TextView nome_produto;
     private TextView preco;
     private String productName;
+    Button button_map1;
+    Button button_map2;
+    Button button_map3;
+    Button button_map4;
 
     @SuppressLint("WrongConstant")
     @Override
@@ -32,7 +38,7 @@ public class ProductActivity extends AppCompatActivity{
         db = openOrCreateDatabase( "banco.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
         try {
             final String CREATE_TABLE_CONTAIN = "CREATE TABLE IF NOT EXISTS Produtos ("
-                    + "barcode varchar(13) PRIMARY KEY,"
+                    + "barcode varchar(13) NOT NULL,"
                     + "name varchar(255) NOT NULL,"
                     + "price varchar(255) DEFAULT NULL,"
                     + "mercado int NOT NULL);";
@@ -55,10 +61,10 @@ public class ProductActivity extends AppCompatActivity{
                     "(1941855753875,'Água Mineral Ice sem Gás Garrafa 500 ml','5,60','002')," +
                     "(7896008005610,'Água Mineral Ice sem Gás Garrafa 500 ml','5,00','003')," +
                     "(1559756353083,'Água Mineral Ice sem Gás Garrafa 500 ml','4,50','004')," +
-                    "(1656324144452,'Água Mineral Crystal com Gás Garrafa 500 ml','4,00','001')," +
-                    "(1670991958843,'Água Mineral Crystal com Gás Garrafa 500 ml','3,50','002')," +
-                    "(1657833610557,'Água Mineral Crystal com Gás Garrafa 500 ml','5,00','003')," +
-                    "(1908796093116,'Água Mineral Crystal com Gás Garrafa 500 ml','6,30','004')," +
+                    "(7894900530001,'Água Mineral Crystal com Gás Garrafa 500 ml','4,00','001')," +
+                    "(7894900530001,'Água Mineral Crystal com Gás Garrafa 500 ml','3,50','002')," +
+                    "(7894900530001,'Água Mineral Crystal com Gás Garrafa 500 ml','5,00','003')," +
+                    "(7894900530001,'Água Mineral Crystal com Gás Garrafa 500 ml','6,30','004')," +
                     "(1318948123603,'Água Mineral Minalba sem Gás Garrafa 1500 ml','8,00','001')," +
                     "(1205119682682,'Água Mineral Minalba sem Gás Garrafa 1500 ml','5,00','002')," +
                     "(1817323326236,'Água Mineral Minalba sem Gás Garrafa 1500 ml','4,50','003')," +
@@ -73,6 +79,43 @@ public class ProductActivity extends AppCompatActivity{
             Toast.makeText(ProductActivity.this, "ERROR "+e.toString(), Toast.LENGTH_LONG).show();
         }
 
+        button_map1 = (Button) findViewById(R.id.btn_map1);
+        button_map1 = (Button) findViewById(R.id.btn_map2);
+        button_map1 = (Button) findViewById(R.id.btn_map3);
+        button_map1 = (Button) findViewById(R.id.btn_map4);
+
+        button_map1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri gmmIntentUri = Uri.parse("geo:-21.309970, -50.347489");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null){
+                    startActivity(mapIntent);
+                }
+            }
+        });
+
+        button_map2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             //   callExternalMap(-21.302982, -50.374716);
+            }
+        });
+
+        button_map3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // callExternalMap(-21.304154, -50.377925);
+            }
+        });
+
+        button_map4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //callExternalMap(-21.304957, -50.380684);
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -146,4 +189,18 @@ public class ProductActivity extends AppCompatActivity{
         preco.setText(productPrice);
         c.close();
     }
+
+    /*
+    private void callExternalMap(LatLng origem, LatLng destino) {
+        try {
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("http://maps.google.com/maps?saddr=" + origem.latitude + "," + origem.longitude + "&daddr=" + destino.latitude + "," + destino.longitude));
+
+            intent.setComponent(new ComponentName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity"));
+
+            startActivity(intent);
+        } catch (Exception ex) {
+            Toast.makeText(this, "Verifique se o Google Maps está instalado em seu dispositivo", Toast.LENGTH_SHORT).show();
+        }
+    }*/
 }
