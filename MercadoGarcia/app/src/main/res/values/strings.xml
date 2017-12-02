@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Aplicativo Mercado Garcia</string>
+    <string name="facebook_app_id">133351857235113</string>
+    <string name="mercado_garcia">Mercado Garcia</string>
+    <string name="logo_do_mercado">logo do mercado</string>
+    <string name="buscar_pelo_nome_do_produto">Buscar pelo nome do produto:</string>
+    <string name="buscar_pelo_codigo_de_barras">Buscar pelo codigo de barras:</string>
+    <string name="buscar">Buscar</string>
+    <string name="escolha_o_tipo_de_busca">Escolha o tipo de busca:</string>
+    <string name="ler_c_digo_de_barras">Leitor de Código de Barras</string>
+    <string name="nome_do_produto">Nome do Produto</string>
+    <string name="unidade_4">Unidade 4:</string>
+    <string name="unidade_3">Unidade 3:</string>
+    <string name="unidade_2">Unidade 2:</string>
+    <string name="unidade_1">Unidade 1:</string>
+    <string name="mapa">MAPA</string>
+</resources>
