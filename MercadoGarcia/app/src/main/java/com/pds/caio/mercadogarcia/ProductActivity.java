@@ -123,6 +123,8 @@ public class ProductActivity extends AppCompatActivity{
                 startActivity(mapIntent);
             }
         });
+
+       // Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
