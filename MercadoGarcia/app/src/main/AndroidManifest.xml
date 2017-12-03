@@ -28,5 +28,10 @@
 
         <activity android:name=".ScanActivity"></activity>
         <activity android:name=".ProductActivity"></activity>
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider{APP_ID}"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
     </application>
+
 </manifest>

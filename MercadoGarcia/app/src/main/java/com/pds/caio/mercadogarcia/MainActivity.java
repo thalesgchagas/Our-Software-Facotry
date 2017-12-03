@@ -9,19 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -31,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private Button srch;
     public static String code;
     public static TextView result;
-    public static TextView nome_produto;
-    /*public static TextView preco1;
-    public static TextView preco2;
-    public static TextView preco3;
-    public static TextView preco4;*/
     LoginButton login_button;
     CallbackManager callbackManager;
     TextView tv_profile_name;
@@ -50,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
         tv_profile_name = (TextView) findViewById(R.id.tv_profile_name);
         iv_profile_pic = (ImageView) findViewById(R.id.iv_profile_pic);
-
         login_button = (LoginButton)findViewById(R.id.login_button);
         login_button.setReadPermissions(Arrays.asList("public_profile"));
         callbackManager = CallbackManager.Factory.create();
 
         loginWithFB();
+        getData();
 
         result = (TextView)findViewById(R.id.result);
         btn = (Button)findViewById(R.id.scan_button);
@@ -73,56 +67,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProductActivity.class);
                 startActivity(intent);
+                //getWebsite();
             }
         });
     }
+
+    /*private void getWebsite(){
+        Document doc = null;
+        try {
+            doc = Jsoup.connect("https://www.google.com/search?q=nescau&tbm=isch").get();
+            Element imageElement = doc.select("img").first();
+            result.setText(""+imageElement.attr("abs:scr"));
+        } catch (IOException e) {
+            result.setText(e.toString());
+        }
+    }*/
 
     private void loginWithFB(){
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-
-
-                                try {
-                                    String id = object.getString("id");
-                                    String name = object.getString("name");
-                                    tv_profile_name.setText("Bem vindo(a), "+name);
-
-
-                                    String imageurl = "https://graph.facebook.com/" + id + "/picture?type=normal";
-
-                                    Picasso.with(MainActivity.this).load(imageurl).into(iv_profile_pic);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
-
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id, name");
-                request.setParameters(parameters);
-                request.executeAsync();
-
-
-                /**
-                 * AccessTokenTracker to manage logout
-                */
-                AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-                    @Override
-                    protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                        if (currentAccessToken == null) {
-                            tv_profile_name.setText("");
-                            iv_profile_pic.setImageResource(R.drawable.maleicon);
-                        }
-                    }
-                };
+                getData();
             }
 
             @Override
@@ -135,6 +100,31 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void getData() {
+        Bundle params = new Bundle();
+        params.putString("fields", "id,name,picture.type(normal)");
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "me", params, HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        if (response != null) {
+                            try {
+                                JSONObject data = response.getJSONObject();
+                                if (data.has("name")){
+                                    String name = data.getString("name");
+                                    tv_profile_name.setText("Bem vindo(a), " + name + "!");
+                                }
+                                if (data.has("picture")) {
+                                    String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+                                    Picasso.with(MainActivity.this).load(profilePicUrl).into(iv_profile_pic);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).executeAsync();
+    }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
