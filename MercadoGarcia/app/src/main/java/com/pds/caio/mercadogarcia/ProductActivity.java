@@ -80,40 +80,47 @@ public class ProductActivity extends AppCompatActivity{
         }
 
         button_map1 = (Button) findViewById(R.id.btn_map1);
-        button_map1 = (Button) findViewById(R.id.btn_map2);
-        button_map1 = (Button) findViewById(R.id.btn_map3);
-        button_map1 = (Button) findViewById(R.id.btn_map4);
+        button_map2 = (Button) findViewById(R.id.btn_map2);
+        button_map3 = (Button) findViewById(R.id.btn_map3);
+        button_map4 = (Button) findViewById(R.id.btn_map4);
 
         button_map1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:-21.309970, -50.347489");
+                Uri gmmIntentUri = Uri.parse("geo:-21.309970, -50.347489?q=-21.309970, -50.347489");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
-                if (mapIntent.resolveActivity(getPackageManager()) != null){
-                    startActivity(mapIntent);
-                }
+                startActivity(mapIntent);
             }
         });
 
         button_map2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   callExternalMap(-21.302982, -50.374716);
+                Uri gmmIntentUri = Uri.parse("geo:-21.302982, -50.374716?q=-21.302982, -50.374716");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
 
         button_map3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // callExternalMap(-21.304154, -50.377925);
+                Uri gmmIntentUri = Uri.parse("geo:-21.304154, -50.377925?q=-21.304154, -50.377925");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
 
         button_map4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //callExternalMap(-21.304957, -50.380684);
+                Uri gmmIntentUri = Uri.parse("geo:-21.304957, -50.380684?q=-21.304957, -50.380684");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
     }
