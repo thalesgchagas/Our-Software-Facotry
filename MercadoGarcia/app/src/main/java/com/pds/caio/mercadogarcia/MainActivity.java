@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         loginWithFB();
         getData();
 
-        result = (TextView)findViewById(R.id.result);
         btn = (Button)findViewById(R.id.scan_button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,21 +66,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProductActivity.class);
                 startActivity(intent);
-                //getWebsite();
             }
         });
     }
-
-    /*private void getWebsite(){
-        Document doc = null;
-        try {
-            doc = Jsoup.connect("https://www.google.com/search?q=nescau&tbm=isch").get();
-            Element imageElement = doc.select("img").first();
-            result.setText(""+imageElement.attr("abs:scr"));
-        } catch (IOException e) {
-            result.setText(e.toString());
-        }
-    }*/
 
     private void loginWithFB(){
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
