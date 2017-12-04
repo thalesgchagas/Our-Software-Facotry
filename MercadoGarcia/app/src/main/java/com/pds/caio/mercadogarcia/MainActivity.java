@@ -21,14 +21,29 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn;
     private Button srch;
-    public static String code;
+    public static String code = "7891000053508";
     public static TextView result;
     LoginButton login_button;
     CallbackManager callbackManager;
@@ -111,6 +126,86 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }).executeAsync();
+    }
+
+    public void searchByBarCode(String barCode, TextView resultView)
+    {
+        String result = "";
+        InputStream inputStream = null;
+        String serachByBarCode_url = "http://oursoftwarefactory.000webhostapp.com/searchByBarCode.php";
+
+        try
+        {
+            URL url = new URL(serachByBarCode_url);
+
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+            String data_string = URLEncoder.encode("barCode","UTF-8")+"="+URLEncoder.encode(barCode,"UTF-8");
+
+            bufferedWriter.write(data_string);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+
+            outputStream.close();
+
+            inputStream = httpURLConnection.getInputStream();
+
+            httpURLConnection.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),8);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = null;
+
+            while((line = bufferedReader.readLine()) != null)
+            {
+                stringBuilder.append(line + "\n");
+            }
+            inputStream.close();
+
+            result = stringBuilder.toString();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            String str = "";
+            JSONArray jsonArray = new JSONArray(result);
+            String[] unidades = {"Rua Azul, 826", "Aldo Cinquini, 254", "Aldo Cinquini, 541", "Aldo Cinquini, 789"};
+
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                str = str +
+                        "Unidade: " + unidades[i] +
+                        "\nProduto: " + jsonObject.getString("DESC_PRODUTO")+
+                        "\nPreço: " + jsonObject.getString("PRECO") + "\n";
+            }
+
+            resultView.setText(str);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
