@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -27,7 +28,9 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn;
+    private Button srch;
     public static String code;
+    public static TextView result;
     public static String JSON_STRING;
     LoginButton login_button;
     CallbackManager callbackManager;

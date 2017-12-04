@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+import static com.pds.caio.mercadogarcia.MainActivity.JSON_STRING;
 
 public class ScanActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
@@ -42,7 +45,11 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBackPressed(){ //Botão BACK padrão do android
-        startActivity(new Intent(this, ProductActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        new ApiConnector().execute();
+        TextView textView = (TextView)findViewById(R.id.textView3);
+        textView.setText(JSON_STRING);
+
+        startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
@@ -63,8 +70,7 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void handleResult(Result rawResult) {
-        //MainActivity.code = rawResult.getText();
-        MainActivity.code = "7891000053508";
+        MainActivity.code = rawResult.getText();
         onBackPressed();
     }
 }
