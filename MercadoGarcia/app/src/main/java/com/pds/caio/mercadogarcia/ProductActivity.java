@@ -2,7 +2,6 @@ package com.pds.caio.mercadogarcia;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -37,7 +35,11 @@ public class ProductActivity extends AppCompatActivity{
     private SQLiteDatabase db;
     private TextView nome_produto;
     private TextView preco;
-    String productName;
+    String preco1;
+    String preco2;
+    String preco3;
+    String preco4;
+    String productName = "";
     ImageView produto;
     Button button_map1;
     Button button_map2;
@@ -58,7 +60,9 @@ public class ProductActivity extends AppCompatActivity{
         getSupportActionBar().setHomeButtonEnabled(true); //Ativar o botão
         getSupportActionBar().setTitle("Aplicativo Mercado Garcia");//Titulo para ser exibido na sua Action Bar em frente à seta
 
-        db = openOrCreateDatabase( "banco.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+        new ApiConnector().execute();
+
+        /*db = openOrCreateDatabase( "banco.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
         try {
             final String CREATE_TABLE_CONTAIN = "CREATE TABLE IF NOT EXISTS Produtos ("
                     + "barcode varchar(13) NOT NULL,"
@@ -100,7 +104,7 @@ public class ProductActivity extends AppCompatActivity{
         }
         catch (Exception e) {
             Toast.makeText(ProductActivity.this, "ERROR "+e.toString(), Toast.LENGTH_LONG).show();
-        }
+        }*/
 
         button_map1 = (Button) findViewById(R.id.btn_map1);
         button_map2 = (Button) findViewById(R.id.btn_map2);
@@ -172,50 +176,118 @@ public class ProductActivity extends AppCompatActivity{
     @Override
     public void onResume() {
         super.onResume();
-        consultaNomeProduto();
-        consultaPrecoProduto(productName, 1);
-        consultaPrecoProduto(productName, 2);
-        consultaPrecoProduto(productName, 3);
-        consultaPrecoProduto(productName, 4);
+        formatTextName();
+        formatTextPrice1();
+        formatTextPrice2();
+        formatTextPrice3();
+        formatTextPrice4();
     }
 
-    private void consultaNomeProduto(){
+    private void formatTextName(){
+        System.out.println(JSON_STRING);
+        String s = JSON_STRING;
+        int counter = 0;
+        int j;
+        for( int i=0; i < s.length(); i++ ) {
+            if( s.charAt(i) == '"' ) {
+                counter++;
+                if (counter == 3){
+                    j = i+1;
+                    while(s.charAt(j) != '"'){
+                        productName = productName+s.charAt(j);
+                        j++;
+                    }
+                }
+            }
+        }
         nome_produto = (TextView)findViewById(R.id.product_name);
-        String columns[] = new String[]{"name", "mercado"};
-        Cursor c = db.query("PRODUTOS", columns, "barcode = "+MainActivity.code, null, null, null, null);
-        while (c.moveToNext()){
-            int index1 = c.getColumnIndex("name");
-            productName = c.getString(index1);
-        }
         nome_produto.setText(productName);
-        nome_format = productName.replaceAll(" ","_").toLowerCase();
         new _JSOUP().execute();
-        c.close();
     }
-
-    private void consultaPrecoProduto(String productName, int unidade){
-        if(unidade == 1)
-            preco = (TextView)findViewById(R.id.price_1);
-        else
-        if(unidade == 2)
-            preco = (TextView)findViewById(R.id.price_2);
-        else
-        if(unidade == 3)
-            preco = (TextView)findViewById(R.id.price_3);
-        else
-        if(unidade == 4)
-            preco = (TextView)findViewById(R.id.price_4);
-
-        String columns[] = new String[]{"price"};
-        Cursor c = db.query("PRODUTOS", columns, "name = '"+productName+"' AND mercado = "+unidade, null, null, null, null);
-        String productPrice = "";
-        while (c.moveToNext()){
-            int index = c.getColumnIndex("price");
-            productPrice = c.getString(index);
+//[{"DESC_PRODUTO":"NESCAL LATA NESTLE 400ML","PRECO":"7.50"},
+// {"DESC_PRODUTO":"NESCAU LATA NESTLE 400ML","PRECO":"7.99"},
+// {"DESC_PRODUTO":"NESCAU LATA NESTLE 400ML","PRECO":"7.50"},
+// {"DESC_PRODUTO":"NESCAL LATA NESTLE 400ML","PRECO":"7.50"}]
+    private void formatTextPrice1(){
+        String s = JSON_STRING;
+        int counter = 0;
+        int j;
+        for( int i=0; i < s.length(); i++ ) {
+            if( s.charAt(i) == '"' ) {
+                counter++;
+                if (counter == 7){
+                    j = i+1;
+                    while(s.charAt(j) != '"'){
+                        preco1 = preco1+s.charAt(j);
+                        j++;
+                    }
+                }
+            }
         }
-        preco.setText(productPrice);
-        c.close();
+        preco = (TextView)findViewById(R.id.price_1);
+        preco.setText(preco1);
     }
+
+    private void formatTextPrice2(){
+        String s = JSON_STRING;
+        int counter = 0;
+        int j;
+        for( int i=0; i < s.length(); i++ ) {
+            if( s.charAt(i) == '"' ) {
+                counter++;
+                if (counter == 15){
+                    j = i+1;
+                    while(s.charAt(j) != '"'){
+                        preco2 = preco2+s.charAt(j);
+                        j++;
+                    }
+                }
+            }
+        }
+        preco = (TextView)findViewById(R.id.price_2);
+        preco.setText(preco2);
+    }
+
+    private void formatTextPrice3(){
+        String s = JSON_STRING;
+        int counter = 0;
+        int j;
+        for( int i=0; i < s.length(); i++ ) {
+            if( s.charAt(i) == '"' ) {
+                counter++;
+                if (counter == 23){
+                    j = i+1;
+                    while(s.charAt(j) != '"'){
+                        preco3 = preco3+s.charAt(j);
+                        j++;
+                    }
+                }
+            }
+        }
+        preco = (TextView)findViewById(R.id.price_3);
+        preco.setText(preco3);
+    }
+
+    private void formatTextPrice4(){
+        String s = JSON_STRING;
+        int counter = 0;
+        int j;
+        for( int i=0; i < s.length(); i++ ) {
+            if( s.charAt(i) == '"' ) {
+                counter++;
+                if (counter == 31){
+                    j = i+1;
+                    while(s.charAt(j) != '"'){
+                        preco4 = preco4+s.charAt(j);
+                        j++;
+                    }
+                }
+            }
+        }
+        preco = (TextView)findViewById(R.id.price_4);
+        preco.setText(preco4);
+    }
+
     public class _JSOUP extends AsyncTask<String, String, String> {
 
         @Override
