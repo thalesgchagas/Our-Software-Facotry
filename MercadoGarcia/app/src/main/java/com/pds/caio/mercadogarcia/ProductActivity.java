@@ -30,8 +30,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pds.caio.mercadogarcia.MainActivity.code;
-
 public class ProductActivity extends AppCompatActivity{
     private SQLiteDatabase db;
     private TextView nome_produto;
@@ -168,8 +166,11 @@ public class ProductActivity extends AppCompatActivity{
     @Override
     public void onResume() {
         super.onResume();
-        MainActivity mainActivity = new MainActivity();
-        mainActivity.searchByBarCode(code, nome_produto);
+        consultaNomeProduto();
+        consultaPrecoProduto(productName, 1);
+        consultaPrecoProduto(productName, 2);
+        consultaPrecoProduto(productName, 3);
+        consultaPrecoProduto(productName, 4);
     }
 
     private void consultaNomeProduto(){
