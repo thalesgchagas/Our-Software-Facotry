@@ -60,36 +60,36 @@ public class ProductActivity extends AppCompatActivity{
                     + "price varchar(255) DEFAULT NULL,"
                     + "mercado int NOT NULL);";
             db.execSQL(CREATE_TABLE_CONTAIN);
-            Toast.makeText(ProductActivity.this, "", Toast.LENGTH_LONG).show();
+
             String sql = "INSERT OR REPLACE INTO PRODUTOS (barcode,name,price,mercado) VALUES " +
-                    "(7891025102113,'Água Mineral Bonafont sem Gás Garrafa 500 ml','3,50','001')," +
-                    "(1932433130426,'Água Mineral Bonafont sem Gás Garrafa 500 ml','5,60','002')," +
-                    "(1376335269460,'Água Mineral Bonafont sem Gás Garrafa 500 ml','4,00','003')," +
-                    "(1381916707174,'Água Mineral Bonafont sem Gás Garrafa 500 ml','4,00','004')," +
-                    "(1120912087460,'Água Mineral Lindoya sem Gás Garrafa 510 ml','3,50','001')," +
-                    "(1571655878590,'Água Mineral Lindoya sem Gás Garrafa 510 ml','5,00','002')," +
-                    "(1305012719084,'Água Mineral Lindoya sem Gás Garrafa 510 ml','5,60','003')," +
-                    "(1983843960281,'Água Mineral Lindoya sem Gás Garrafa 510 ml','4,00','004')," +
-                    "(1377143490645,'Água Mineral Bonafont sem Gás Garrafa 1500 ml','5,00','001')," +
-                    "(1687142704923,'Água Mineral Bonafont sem Gás Garrafa 1500 ml','5,00','002')," +
-                    "(1894703290114,'Água Mineral Bonafont sem Gás Garrafa 1500 ml','4,00','003')," +
-                    "(1610954717215,'Água Mineral Bonafont sem Gás Garrafa 1500 ml','4,50','004')," +
-                    "(1455897308058,'Água Mineral Ice sem Gás Garrafa 500 ml','4,00','001')," +
-                    "(1941855753875,'Água Mineral Ice sem Gás Garrafa 500 ml','5,60','002')," +
-                    "(7896008005610,'Água Mineral Ice sem Gás Garrafa 500 ml','5,00','003')," +
-                    "(1559756353083,'Água Mineral Ice sem Gás Garrafa 500 ml','4,50','004')," +
-                    "(7894900530001,'NESCAU LATA NESTLE 400ML','4,00','001')," +
-                    "(7894900530001,'NESCAU LATA NESTLE 400ML','3,50','002')," +
-                    "(7894900530001,'NESCAU LATA NESTLE 400ML','5,00','003')," +
-                    "(7894900530001,'NESCAU LATA NESTLE 400ML','6,30','004')," +
-                    "(1318948123603,'Água Mineral Minalba sem Gás Garrafa 1500 ml','8,00','001')," +
-                    "(1205119682682,'Água Mineral Minalba sem Gás Garrafa 1500 ml','5,00','002')," +
-                    "(1817323326236,'Água Mineral Minalba sem Gás Garrafa 1500 ml','4,50','003')," +
-                    "(1951686708463,'Água Mineral Minalba sem Gás Garrafa 1500 ml','8,00','004')," +
-                    "(1699982378631,'Água Mineral Lindoya com Gás Garrafa 510 ml','5,60','001')," +
-                    "(1661905387623,'Água Mineral Lindoya com Gás Garrafa 510 ml','6,80','002')," +
-                    "(1846277404576,'Água Mineral Lindoya com Gás Garrafa 510 ml','5,00','003')," +
-                    "(1754051100876,'Água Mineral Lindoya com Gás Garrafa 510 ml','5,00','004');";
+                    "(7894900530001,'AGUA MINERAL CRYSTAL SEM GAS 500ML','1,50','001')," +
+                    "(7894900530001,'AGUA MINERAL CRYSTAL SEM GAS 500ML','1,50','002')," +
+                    "(7894900530001,'AGUA MINERAL CRYSTAL SEM GAS 500ML','2,00','003')," +
+                    "(7894900530001,'AGUA MINERAL CRYSTAL SEM GAS 500ML','2,00','004')," +
+                    "(7891035617959,'INSET SBP 450ML','9,69','001')," +
+                    "(7891035617959,'INSET SBP 450ML','11,00','002')," +
+                    "(7891035617959,'INSET SBP 450ML','9,69','003')," +
+                    "(7891035617959,'INSET SBP 450ML','12,00','004')," +
+                    "(7896060401313,'SABAO RIO TRADICIONAL 1K','4,19','001')," +
+                    "(7896060401313,'SABAO RIO TRADICIONAL 1K','4,19','002')," +
+                    "(7896060401313,'SABAO RIO TRADICIONAL 1K','4,19','003')," +
+                    "(7896060401313,'SABAO RIO TRADICIONAL 1K','4,19','004')," +
+                    "(7896067203033,'PILHA COMUM PANASONIC AA','4,50','001')," +
+                    "(7896067203033,'PILHA COMUM PANASONIC AA','4,50','002')," +
+                    "(7896067203033,'PILHA COMUM PANASONIC AA','4,50','003')," +
+                    "(7896067203033,'PILHA COMUM PANASONIC AA','4,50','004')," +
+                    "(7891000053508,'NESCAU LATA NESTLE 400ML','7,50','001')," +
+                    "(7891000053508,'NESCAU LATA NESTLE 400ML','7,98','002')," +
+                    "(7891000053508,'NESCAU LATA NESTLE 400ML','7,50','003')," +
+                    "(7891000053508,'NESCAU LATA NESTLE 400ML','7,50','004')," +
+                    "(7894900593709,'DEL VAL KAPO UVA 200ML','2,50','001')," +
+                    "(7894900593709,'DEL VAL KAPO UVA 200ML','2,00','002')," +
+                    "(7894900593709,'DEL VAL KAPO UVA 200ML','2,00','003')," +
+                    "(7894900593709,'DEL VAL KAPO UVA 200ML','2,00','004')," +
+                    "(7891095154210,'PIMENTA DO REINO KITANO 15G','1,89','001')," +
+                    "(7891095154210,'PIMENTA DO REINO KITANO 15G','1,89','002')," +
+                    "(7891095154210,'PIMENTA DO REINO KITANO 15G','1,89','003')," +
+                    "(7891095154210,'PIMENTA DO REINO KITANO 15G','1,89','004');";
             db.execSQL(sql);
         }
         catch (Exception e) {
