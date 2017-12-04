@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.jsoup.Jsoup;
@@ -29,6 +30,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.pds.caio.mercadogarcia.MainActivity.JSON_STRING;
 
 public class ProductActivity extends AppCompatActivity{
     private SQLiteDatabase db;
@@ -42,6 +45,10 @@ public class ProductActivity extends AppCompatActivity{
     Button button_map4;
     String nome_format;
 
+    String json_string;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+
     @SuppressLint("WrongConstant")
     @Override
     public void onCreate(Bundle state) {
@@ -50,7 +57,6 @@ public class ProductActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Mostrar o botão
         getSupportActionBar().setHomeButtonEnabled(true); //Ativar o botão
         getSupportActionBar().setTitle("Aplicativo Mercado Garcia");//Titulo para ser exibido na sua Action Bar em frente à seta
-
 
         db = openOrCreateDatabase( "banco.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
         try {

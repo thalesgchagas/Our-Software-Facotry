@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Button srch;
     public static String code;
     public static TextView result;
+    public static String JSON_STRING;
     LoginButton login_button;
     CallbackManager callbackManager;
     TextView tv_profile_name;
@@ -60,14 +62,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        srch = (Button)findViewById(R.id.search_button);
-        srch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProductActivity.class);
-                startActivity(intent);
-            }
-        });
+        new ApiConnector().execute();
+        TextView textView = (TextView)findViewById(R.id.textView3);
+        textView.setText(JSON_STRING);
     }
 
     private void loginWithFB(){
