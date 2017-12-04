@@ -62,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        new ApiConnector().execute();
-        TextView textView = (TextView)findViewById(R.id.textView3);
-        textView.setText(JSON_STRING);
     }
 
     private void loginWithFB(){
